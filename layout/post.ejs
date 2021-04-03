@@ -1,0 +1,16 @@
+<%- partial('common/article', {post: page, index: false}) %>
+
+<script src="https://readmore.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    var article = document.getElementsByTagName("article")[0];
+    const btw = new BTWPlugin();
+    btw.init({
+        id: article.id,
+        blogId: '10053-1610820399501-222',
+        name: 'Kirito的技术分享',
+        qrcode: 'http://kirito.iocoder.cn/qrcode_for_gh_c06057be7960_258%20%281%29.jpg',
+        keyword: 'more',
+    });
+    var rm_btn = $("#read-more-btn");
+    rm_btn.html('~阅读全文~人机检测~');
+</script>   
