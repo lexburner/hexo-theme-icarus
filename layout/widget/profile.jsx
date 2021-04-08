@@ -72,8 +72,12 @@ class Profile extends Component {
                         </div>
                     </div>
                 </nav>
+                <figure class="image is-128x128 mx-auto mb-2">
+                    <img class={'avatar'} src={followLink} alt="Kirito的技术分享" />
+                </figure>
                 {followLink ? <div class="level">
-                    <a class="level-item button is-primary is-rounded" href={followLink} target="_blank" rel="noopener">{followTitle}</a>
+                {/* href={followLink} */}
+                    <a class="level-item button is-primary is-rounded"  target="_blank" rel="noopener">{followTitle}</a>
                 </div> : null}
                 {socialLinks ? this.renderSocialLinks(socialLinks) : null}
             </div>
