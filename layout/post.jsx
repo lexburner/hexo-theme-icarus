@@ -11,7 +11,7 @@ module.exports = class extends Component {
                     id: "article-content",
                     blogId: '10053-1610820399501-222',
                     name: 'Kirito的技术分享',
-                    qrcode: 'http://kirito.iocoder.cn/qrcode_for_gh_c06057be7960_258%20%281%29.jpg',
+                    qrcode: 'http://image.cnkirito.cn/qrcode_for_gh_c06057be7960_258%20%281%29.jpg',
                     keyword: 'more'
                 });
                 var rm_btn = $('#read-more-btn');
