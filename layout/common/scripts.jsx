@@ -36,6 +36,7 @@ module.exports = class extends Component {
             <script dangerouslySetInnerHTML={{ __html: embeddedConfig }}></script>
             <script src={url_for('/js/column.js')}></script>
             <Plugins site={site} config={config} page={page} helper={helper} head={false} />
+            <script src={url_for('/js/scroll-animations.js')} defer></script>
             <script src={url_for('/js/main.js')} defer></script>
         </Fragment>;
     }

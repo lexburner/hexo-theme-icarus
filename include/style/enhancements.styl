@@ -1,0 +1,698 @@
+/* ==========================================
+ *    博客视觉优化增强样式
+ *    包含卡片动画、按钮交互、滚动效果等
+ * ========================================== */
+
+/* ---------------------------------
+ *       1. 卡片悬停动画
+ * --------------------------------- */
+.card
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease
+    border: 1px solid transparent
+    cursor: pointer
+    
+    &:hover
+        transform: translateY(-8px)
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1)
+        border-color: rgba(66, 139, 202, 0.3)
+    
+    // 卡片图片悬停缩放增强
+    .card-image
+        overflow: hidden
+        position: relative
+        
+        &::before
+            content: ''
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            background: linear-gradient(135deg, rgba(66, 139, 202, 0) 0%, rgba(66, 139, 202, 0.2) 100%)
+            opacity: 0
+            transition: opacity 0.4s ease
+            z-index: 1
+            pointer-events: none
+        
+        img
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease
+            will-change: transform
+        
+        &:hover
+            &::before
+                opacity: 1
+            
+            img
+                transform: scale(1.03)
+                filter: brightness(1.03)
+
+/* ---------------------------------
+ *    2. 文章标题和按钮交互动画
+ * --------------------------------- */
+// 文章内容区域图片增强
+.content
+    img
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        cursor: zoom-in
+        border-radius: 4px
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+        
+        &:hover
+            transform: scale(1.02) translateY(-2px)
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12)
+            filter: brightness(1.02)
+            z-index: 10
+            position: relative
+
+.article
+    .title
+        position: relative
+        padding-bottom: 0.75rem
+        margin-bottom: 1rem !important
+        
+        // 简洁的底部边框
+        &::after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 60px
+            height: 3px
+            background: linear-gradient(90deg, $primary 0%, rgba($primary, 0.3) 100%)
+            border-radius: 2px
+            transition: width 0.3s ease
+        
+        &:hover::after
+            width: 100%
+        
+        i.fa-angle-double-right
+            display: inline-block
+            transition: transform 0.3s ease, color 0.3s ease
+            margin-right: 0.5rem
+        
+        &:hover i.fa-angle-double-right
+            transform: translateX(5px)
+            color: $primary
+        
+        a, span
+            transition: color 0.3s ease
+            
+        &:hover a, &:hover span
+            color: $primary !important
+    
+    // "阅读更多"按钮增强
+    .article-more
+        position: relative
+        overflow: hidden
+        transition: all 0.3s ease
+        
+        &::before
+            content: ''
+            position: absolute
+            top: 0
+            left: -100%
+            width: 100%
+            height: 100%
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)
+            transition: left 0.5s ease
+        
+        &:hover
+            transform: translateY(-2px)
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+            
+            &::before
+                left: 100%
+        
+        i
+            transition: transform 0.3s ease
+        
+        &:hover i
+            transform: translateX(3px)
+
+/* ---------------------------------
+ *      3. 导航栏菜单项动画
+ * --------------------------------- */
+.navbar-main
+    .navbar-item
+        position: relative
+        transition: color 0.3s ease
+        
+        &::after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 50%
+            width: 0
+            height: 2px
+            background: $primary
+            transition: width 0.3s ease, left 0.3s ease
+        
+        &:hover::after, &.is-active::after
+            width: 80%
+            left: 10%
+        
+        &:hover
+            color: $primary
+
+.navbar-logo
+    img
+        transition: transform 0.3s ease
+    
+    &:hover img
+        transform: rotate(5deg) scale(1.05)
+
+/* ---------------------------------
+ *      4. 回到顶部按钮动画
+ * --------------------------------- */
+#back-to-top
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+    
+    &:hover
+        transform: translateY(-5px) scale(1.1)
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3)
+    
+    &:active
+        transform: translateY(-2px) scale(1.05)
+    
+    // 添加脉冲动画
+    @keyframes pulse
+        0%, 100%
+            box-shadow: 0 0 0 0 rgba(66, 139, 202, 0.7)
+        50%
+            box-shadow: 0 0 0 10px rgba(66, 139, 202, 0)
+    
+    &.fade-in
+        animation: pulse 2s infinite
+
+/* ---------------------------------
+ *      5. 社交链接图标动画
+ * --------------------------------- */
+.profile-widget, .footer
+    .social-links, .level-end
+        a
+            display: inline-block
+            transition: all 0.3s ease
+            
+            &:hover
+                transform: translateY(-3px) rotate(5deg)
+                color: $primary
+            
+            i
+                transition: transform 0.3s ease
+            
+            &:hover i
+                animation: bounce 0.5s ease
+
+@keyframes bounce
+    0%, 100%
+        transform: translateY(0)
+    25%
+        transform: translateY(-5px)
+    50%
+        transform: translateY(0)
+    75%
+        transform: translateY(-3px)
+
+/* ---------------------------------
+ *      6. 标签云彩虹渐变效果
+ * --------------------------------- */
+.article-tags
+    a
+        display: inline-block
+        transition: all 0.3s ease
+        position: relative
+        
+        &::before
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 0
+            height: 2px
+            background: linear-gradient(90deg, #ff6b6b, #f06595, #cc5de8, #845ef7, #5c7cfa, #339af0)
+            transition: width 0.3s ease
+        
+        &:hover
+            transform: translateY(-2px)
+            color: $primary
+            
+            &::before
+                width: 100%
+
+.widget .tags .tag
+    transition: all 0.3s ease
+    
+    &:hover
+        transform: scale(1.1) rotate(2deg)
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2)
+
+/* ---------------------------------
+ *      7. 输入框聚焦光晕效果
+ * --------------------------------- */
+.input, .textarea
+    transition: all 0.3s ease
+    
+    &:focus
+        box-shadow: 0 0 0 3px rgba(66, 139, 202, 0.2), 0 0 10px rgba(66, 139, 202, 0.3)
+        transform: scale(1.01)
+
+/* ---------------------------------
+ *      8. 分页按钮动画
+ * --------------------------------- */
+.pagination
+    .pagination-link, .pagination-previous, .pagination-next
+        transition: all 0.3s ease
+        
+        &:hover
+            transform: translateY(-2px)
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+        
+        &.is-current
+            animation: pulse-current 2s ease-in-out infinite
+
+@keyframes pulse-current
+    0%, 100%
+        transform: scale(1)
+    50%
+        transform: scale(1.05)
+
+/* ---------------------------------
+ *      9. 文章元信息图标动画
+ * --------------------------------- */
+.article-meta
+    .level-item
+        i
+            transition: transform 0.3s ease, color 0.3s ease
+        
+        &:hover i
+            transform: rotate(360deg)
+            color: $primary
+
+/* ---------------------------------
+ *      10. 侧边栏小部件动画
+ * --------------------------------- */
+.widget
+    .menu-list
+        li
+            a
+                position: relative
+                transition: all 0.3s ease
+                
+                &::before
+                    content: '▸'
+                    position: absolute
+                    left: -15px
+                    opacity: 0
+                    transition: all 0.3s ease
+                    color: $primary
+                
+                &:hover
+                    transform: translateX(10px)
+                    color: $primary
+                    
+                    &::before
+                        opacity: 1
+                        left: 0
+
+/* ---------------------------------
+ *      11. 目录（TOC）高亮动画
+ * --------------------------------- */
+#toc
+    .menu-list
+        a
+            transition: all 0.3s ease
+            border-left: 3px solid transparent
+            
+            &.is-active, &:hover
+                border-left-color: $primary
+                background: rgba(66, 139, 202, 0.1)
+                transform: translateX(5px)
+
+/* ---------------------------------
+ *      12. 代码块复制按钮动画
+ * --------------------------------- */
+.article
+    .highlight
+        position: relative
+        
+        .copy-button
+            transition: all 0.3s ease
+            
+            &:hover
+                transform: scale(1.1)
+                background: $primary
+                color: white
+            
+            &:active
+                transform: scale(0.95)
+
+/* ---------------------------------
+ *      13. 打赏按钮呼吸灯效果
+ * --------------------------------- */
+.donate
+    .button
+        position: relative
+        overflow: hidden
+        
+        &::before
+            content: ''
+            position: absolute
+            top: -50%
+            left: -50%
+            width: 200%
+            height: 200%
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%)
+            opacity: 0
+            transition: opacity 0.5s ease
+        
+        &:hover::before
+            opacity: 1
+            animation: breathe 2s ease-in-out infinite
+
+@keyframes breathe
+    0%, 100%
+        transform: scale(1)
+        opacity: 0.5
+    50%
+        transform: scale(1.1)
+        opacity: 1
+
+/* ---------------------------------
+ *      14. 文章许可证块动画
+ * --------------------------------- */
+.article-licensing
+    transition: all 0.3s ease
+    border-left: 3px solid transparent
+    
+    &:hover
+        border-left-color: $primary
+        background: rgba(66, 139, 202, 0.05)
+        transform: translateX(5px)
+
+/* ---------------------------------
+ *      15. 搜索框动画增强
+ * --------------------------------- */
+.searchbox
+    .searchbox-container
+        transition: all 0.3s ease
+        
+        &:focus-within
+            transform: scale(1.02)
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15)
+    
+    .searchbox-input
+        transition: all 0.3s ease
+        
+        &:focus
+            box-shadow: 0 0 0 3px rgba(66, 139, 202, 0.2)
+
+/* ---------------------------------
+ *      16. 移动端优化
+ * --------------------------------- */
+@media (max-width: 768px)
+    .card:hover
+        transform: translateY(-4px)
+    
+    .navbar-item::after
+        display: none
+    
+    #back-to-top:hover
+        transform: translateY(0) scale(1.05)
+
+/* ---------------------------------
+ *      17. 平滑滚动
+ * --------------------------------- */
+html
+    scroll-behavior: smooth
+
+/* ---------------------------------
+ *      18. 选中文本样式
+ * --------------------------------- */
+::selection
+    background: rgba(66, 139, 202, 0.3)
+    color: inherit
+
+::-moz-selection
+    background: rgba(66, 139, 202, 0.3)
+    color: inherit
+
+/* ---------------------------------
+ *      19. 图片画廊增强效果
+ * --------------------------------- */
+// 为所有图片添加光晕边框效果
+.card-image, .content
+    a
+        display: block
+        position: relative
+        
+        &:hover
+            img
+                box-shadow: 0 0 0 2px rgba(66, 139, 202, 0.3), 0 8px 20px rgba(0, 0, 0, 0.15)
+
+// 图片加载动画
+@keyframes imageLoad
+    0%
+        opacity: 0
+        transform: scale(0.95)
+    100%
+        opacity: 1
+        transform: scale(1)
+
+img
+    animation: imageLoad 0.5s ease-out
+
+// 图片闪烁效果（悬停时）
+@keyframes shimmer
+    0%
+        background-position: -100% 0
+    100%
+        background-position: 200% 0
+
+.card-image:hover::after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)
+    background-size: 200% 100%
+    animation: shimmer 1.5s ease-in-out
+    z-index: 2
+    pointer-events: none
+
+/* ---------------------------------
+ *      20. 文章标题渐变色条装饰
+ * --------------------------------- */
+.content
+    h1, h2, h3, h4, h5, h6
+        position: relative
+        padding-left: 1rem
+        
+        &::before
+            content: ''
+            position: absolute
+            left: 0
+            top: 0
+            bottom: 0
+            width: 4px
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%)
+            border-radius: 2px
+    
+    // 引用块渐变背景
+    blockquote
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)
+        border-left: 5px solid #667eea
+        padding: 1rem 1.5rem
+        margin: 1.5rem 0
+        border-radius: 4px
+        position: relative
+        
+        &::before
+            content: '"'
+            position: absolute
+            top: -10px
+            left: 10px
+            font-size: 3rem
+            color: rgba(102, 126, 234, 0.3)
+            font-family: Georgia, serif
+    
+    // 链接渐变色文字
+    a
+        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb)
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+        background-clip: text
+        position: relative
+        transition: all 0.3s ease
+        
+        &::after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 0
+            height: 2px
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb)
+            transition: width 0.3s ease
+        
+        &:hover::after
+            width: 100%
+
+/* ---------------------------------
+ *      21. 代码区域美化
+ * --------------------------------- */
+// 行内代码渐变背景
+.content
+    code
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%)
+        color: #667eea
+        padding: 0.2em 0.4em
+        border-radius: 3px
+        font-weight: 500
+        border: 1px solid rgba(102, 126, 234, 0.2)
+        transition: all 0.3s ease
+        
+        &:hover
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.25) 0%, rgba(240, 147, 251, 0.25) 100%)
+            transform: scale(1.05)
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2)
+
+// 代码块悬停行高亮
+figure.highlight
+    .line
+        transition: background-color 0.2s ease
+        display: block
+        padding: 0 1em
+        margin: 0 -1em
+        
+        &:hover
+            background-color: rgba(102, 126, 234, 0.1)
+            border-left: 3px solid #667eea
+            padding-left: calc(1em - 3px)
+
+/* ---------------------------------
+ *      22. 侧边栏优化
+ * --------------------------------- */
+// 个人头像悬偟旋转
+.card
+    .card-image
+        img.avatar, img[alt*="avatar"], img[alt*="头像"]
+            transition: transform 0.6s ease
+            
+            &:hover
+                transform: rotate(360deg) scale(1.1)
+
+// 标签云渐变背景
+.widget .tags
+    .tag
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+        color: white
+        border: none
+        transition: all 0.3s ease
+        
+        &:hover
+            background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%)
+            transform: scale(1.1) rotate(2deg)
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4)
+
+// 侧边栏菜单项渐变效果
+.widget
+    .menu-list
+        a
+            transition: all 0.3s ease
+            border-left: 3px solid transparent
+            
+            &:hover, &.is-active
+                background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%)
+                border-left-color: #667eea
+                transform: translateX(5px)
+
+/* ---------------------------------
+ *      23. 表格美化
+ * --------------------------------- */
+.content
+    table
+        border-collapse: collapse
+        width: 100%
+        margin: 1.5rem 0
+        border-radius: 8px
+        overflow: hidden
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+        
+        thead
+            tr
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+                
+                th
+                    color: white
+                    font-weight: 600
+                    padding: 1rem
+                    text-align: left
+                    border: none
+        
+        tbody
+            tr
+                transition: all 0.3s ease
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+                
+                &:hover
+                    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.05) 100%)
+                    transform: scale(1.01)
+                    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2)
+                
+                td
+                    padding: 0.75rem 1rem
+                    border: none
+                
+                &:nth-child(even)
+                    background-color: rgba(0, 0, 0, 0.02)
+
+/* ---------------------------------
+ *      24. 页面内容淡入上移动画
+ * --------------------------------- */
+@keyframes fadeInUp
+    0%
+        opacity: 0
+        transform: translateY(30px)
+    100%
+        opacity: 1
+        transform: translateY(0)
+
+// 应用到主要内容区域
+.section .container
+    animation: fadeInUp 0.8s ease-out
+
+.card
+    animation: fadeInUp 0.6s ease-out
+    animation-fill-mode: both
+    
+    &:nth-child(1)
+        animation-delay: 0.1s
+    
+    &:nth-child(2)
+        animation-delay: 0.2s
+    
+    &:nth-child(3)
+        animation-delay: 0.3s
+    
+    &:nth-child(4)
+        animation-delay: 0.4s
+    
+    &:nth-child(5)
+        animation-delay: 0.5s
+
+// 文章元素逐个淡入
+.article
+    .title, .article-meta, .content > *
+        animation: fadeInUp 0.6s ease-out
+        animation-fill-mode: both
+    
+    .title
+        animation-delay: 0.1s
+    
+    .article-meta
+        animation-delay: 0.2s
+    
+    .content > *
+        animation-delay: 0.3s

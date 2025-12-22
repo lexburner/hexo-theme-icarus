@@ -41,12 +41,14 @@ module.exports = class extends Component {
                 {/* Metadata */}
                 <article id="article-content" class={`card-content article${'direction' in page ? ' ' + page.direction : ''}`} role="article">
                    {/* Title */}
-                   <h1 className="title is-size-3 is-size-4-mobile has-text-weight-normal">
+                   <h1 className="title is-size-3 is-size-4-mobile has-text-weight-semibold article-main-title">
                        {index ?
-                           <a className="has-link-black-ter" href={url_for(page.link || page.path)}>
+                           <a className="has-text-dark" href={url_for(page.link || page.path)}>
                                <i className="fas fa-angle-double-right"></i>{page.title}
                            </a> :
-                           [<i className="fas fa-angle-double-right"></i>, page.title]
+                           <span className="has-text-dark">
+                               <i className="fas fa-angle-double-right"></i>{page.title}
+                           </span>
                        }
                    </h1>
                     {page.layout !== 'page' ? <div class="article-meta is-size-7 is-uppercase level is-mobile">
