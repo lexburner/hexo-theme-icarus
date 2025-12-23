@@ -663,6 +663,30 @@ figure.highlight
 .section .container
     animation: fadeInUp 0.8s ease-out
 
+/* ---------------------------------
+ *    12. 大屏幕下主内容区域放宽
+ * --------------------------------- */
+// 在宽屏和超大屏下，只放宽中间主内容区，保持侧边栏宽度
+@media screen and (min-width: 1216px)
+    .is-3-column
+        .column-main.is-6-widescreen
+            flex: none
+            width: 58.333333% !important  // 原来是 50% (6/12)，现在是 58.33% (7/12)
+        
+        .column-left, .column-right
+            flex: none
+            width: 20.833333% !important  // 保持侧边栏为 2.5/12，确保总和为 100%
+
+@media screen and (min-width: 1408px)
+    .is-3-column
+        .column-main.is-6-widescreen
+            flex: none
+            width: 66.666667% !important  // 在超大屏上进一步放宽到 8/12
+        
+        .column-left, .column-right
+            flex: none
+            width: 16.666667% !important  // 侧边栏缩小到 2/12
+
 .card
     animation: fadeInUp 0.6s ease-out
     animation-fill-mode: both
