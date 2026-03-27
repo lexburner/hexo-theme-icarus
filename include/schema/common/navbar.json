@@ -9,8 +9,30 @@
             "description": "Navigation menu items",
             "patternProperties": {
                 ".+": {
-                    "type": "string",
-                    "description": "URL or path of the menu link"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "URL or path of the menu link"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "children": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": { "type": "string" },
+                                            "url": { "type": "string" },
+                                            "description": { "type": "string" }
+                                        },
+                                        "required": ["name", "url"]
+                                    }
+                                }
+                            },
+                            "required": ["children"]
+                        }
+                    ]
                 }
             },
             "examples": [

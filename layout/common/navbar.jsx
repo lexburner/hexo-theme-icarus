@@ -50,6 +50,23 @@ class Navbar extends Component {
                     {Object.keys(menu).length ? <div class="navbar-start">
                         {Object.keys(menu).map(name => {
                             const item = menu[name];
+                            if (item.isDropdown) {
+                                return <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">{name}</a>
+                                    <div class="navbar-dropdown is-boxed">
+                                        {item.children.map(child => (
+                                            <a class="navbar-item" href={child.url} target="_blank" rel="noopener">
+                                                <div class="navbar-dropdown-item-content">
+                                                    <div class="navbar-dropdown-item-text">
+                                                        <strong>{child.name}</strong>
+                                                        {child.description ? <p>{child.description}</p> : null}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>;
+                            }
                             return <a class={classname({ 'navbar-item': true, 'is-active': item.active })} href={item.url}>{name}</a>;
                         })}
                     </div> : null}
@@ -87,9 +104,21 @@ module.exports = cacheComponent(Navbar, 'common.navbar', props => {
     if (navbar && navbar.menu) {
         const pageUrl = typeof page.path !== 'undefined' ? url_for(page.path) : '';
         Object.keys(navbar.menu).forEach(name => {
-            const url = url_for(navbar.menu[name]);
-            const active = isSameLink(url, pageUrl);
-            menu[name] = { url, active };
+            const value = navbar.menu[name];
+            if (typeof value === 'string') {
+                const url = url_for(value);
+                const active = isSameLink(url, pageUrl);
+                menu[name] = { url, active };
+            } else if (value && value.children) {
+                menu[name] = {
+                    isDropdown: true,
+                    children: value.children.map(child => ({
+                        name: child.name,
+                        url: url_for(child.url),
+                        description: child.description || ''
+                    }))
+                };
+            }
         });
     }
 
